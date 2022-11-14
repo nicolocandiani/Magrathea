@@ -862,7 +862,8 @@ double EOS::density(double P, double T, double rho_guess)
       cout<<"Warning: Request density for "<<phasetype<<" at infinite/nan value.  P="<<P/1E10<<" T="<<T<<endl;
     return numeric_limits<double>::quiet_NaN();
   }
-
+  // if(T>2E5)
+  //   cout<<P/1E10<<"GPa "<<T<<" K "<<rho_guess<<" g/cm3"<<endl;
   int status;
   
   if(P < 0 || P > 1E16)		// unrealistic pressure

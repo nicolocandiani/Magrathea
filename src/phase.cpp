@@ -341,8 +341,9 @@ EOS* find_Fe_phase(double P, double T)
   P /= 1E10;			// convert microbar to GPa
 
   // Default Core
-  if( T > 12.8*P + 2424 && T > 13.7*P + 2328)   // melting curve from Dorogokupets et al. 2017, Scientific Reports. fcc and hcp Fe melting curve.
-    return Fe_liquid;
+  //if( T > 12.8*P + 2424 && T > 13.7*P + 2328)   // melting curve from Dorogokupets et al. 2017, Scientific Reports. fcc and hcp Fe melting curve.
+  if(T>5530*pow((P-260)/293 + 1,0.552))   // melting curve from Kraus et al. 2022, Science.
+   return Fe_liquidGrant;
   else
     return Fe_hcp;             // use hcp Iron for all regions.
 

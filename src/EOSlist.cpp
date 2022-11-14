@@ -37,7 +37,14 @@ For RTpress style of EOS, also need a _b array. They are fitted polynomial param
 
 // ==========  Iron  ================
 
-// ---------------------------------
+// -----------------------------------
+// Liquid Iron, Grant 2021 JGR
+
+double Fe_liquidGrant_array[][2] = {{0,2}, {1,10.8}, {2,25.3}, {3,6.60}, {5,mFe}, {8,2.42}, {9,2.76}, {10,0.5}, {14,1}, {15,26}};
+
+EOS *Fe_liquidGrant = new EOS("Fe liquid (Grant)", Fe_liquidGrant_array, sizeof(Fe_liquidGrant_array)/2/sizeof(Fe_liquidGrant_array[0][0]));
+
+// -----------------------------------
 // Liquid Iron, Dorogokupets et al. 2017, Scientific Reports.
 // DEFAULT
 

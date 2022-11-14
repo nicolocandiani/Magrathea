@@ -470,6 +470,7 @@ hydro::hydro(double Rp, vector<PhaseDgm> &Comp_in, vector<double> Mass_Comp, vec
   gsl_odeiv2_evolve_free (e);
   gsl_odeiv2_control_free (c);
   gsl_odeiv2_step_free (s);
+  cout<<"Pc="<<P[0]<<", Rp="<<Rp/RE<<"RE , Tc="<<T[0]<<" K, ";
 }
 
 
@@ -1270,6 +1271,7 @@ hydro::hydro(double Rp, double Pc, double Tc,  vector<PhaseDgm> &Comp_in, vector
       T.insert(T.begin()+ninner, y[2]);
       rho.insert(rho.begin()+ninner, rhot);
       params.x[0] = rhot;
+      cout<<"r="<<y[0]<<" m="<<(Mtot-m)/ME<<"MEarth P="<<y[1]/1E10<<"GPa rho="<<params.x[0]<<" T="<<y[2]<<" h="<<h/ME<<' '<<find_phase(Mtot-m,Comp,M_Comp,y[1],y[2])->getEOS()<<endl;
     }
 
     if (m > (1-1E-15) * (Mtot - Mfit) || y[1] >= 1E15)	// reaches the fit point
@@ -1601,6 +1603,7 @@ hydro* Rloop(vector<PhaseDgm> &Comp, vector<double> M_Comp, vector<double> ave_r
     R_hi = gsl_root_fsolver_x_upper (s);
 
     status = gsl_root_test_interval (R_lo, R_hi, 1E-10, R_eps_rel); // test radius precision
+    cout<<iter<<' '<<R_lo<<' '<<R_hi<<' '<<R_hi-R_lo<<' '<<params.x[0]<<' '<<params.x[1]<<endl;
   }
   while (status == GSL_CONTINUE && iter < max_iter);
 
@@ -1617,7 +1620,7 @@ hydro* Rloop(vector<PhaseDgm> &Comp, vector<double> M_Comp, vector<double> ave_r
 
   Pc = temp -> getPc() * sqrt(1 + temp -> getRc() / Rp); // Make a correction to the pressure
   Tc = temp -> getTc();
-
+  cout<<"Rloop completed."<<endl;
   return temp;
 }
 
