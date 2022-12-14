@@ -1271,7 +1271,7 @@ hydro::hydro(double Rp, double Pc, double Tc,  vector<PhaseDgm> &Comp_in, vector
       T.insert(T.begin()+ninner, y[2]);
       rho.insert(rho.begin()+ninner, rhot);
       params.x[0] = rhot;
-      cout<<"r="<<y[0]<<" m="<<(Mtot-m)/ME<<"MEarth P="<<y[1]/1E10<<"GPa rho="<<params.x[0]<<" T="<<y[2]<<" h="<<h/ME<<' '<<find_phase(Mtot-m,Comp,M_Comp,y[1],y[2])->getEOS()<<endl;
+      cout<<"r="<<y[0]/RE<<" m="<<(Mtot-m)/ME<<"MEarth P="<<y[1]/1E10<<"GPa rho="<<params.x[0]<<" T="<<y[2]<<" h="<<h/ME<<' '<<find_phase(Mtot-m,Comp,M_Comp,y[1],y[2])->getEOS()<<endl;
     }
 
     if (m > (1-1E-15) * (Mtot - Mfit) || y[1] >= 1E15)	// reaches the fit point
@@ -1603,7 +1603,7 @@ hydro* Rloop(vector<PhaseDgm> &Comp, vector<double> M_Comp, vector<double> ave_r
     R_hi = gsl_root_fsolver_x_upper (s);
 
     status = gsl_root_test_interval (R_lo, R_hi, 1E-10, R_eps_rel); // test radius precision
-    cout<<iter<<' '<<R_lo<<' '<<R_hi<<' '<<R_hi-R_lo<<' '<<params.x[0]<<' '<<params.x[1]<<endl;
+    cout<<iter<<' '<<R_lo/RE<<' '<<R_hi/RE<<' '<<R_hi-R_lo<<" Rc="<<params.x[0]<<" Pc="<<params.x[1]<<endl;
   }
   while (status == GSL_CONTINUE && iter < max_iter);
 
@@ -1616,11 +1616,13 @@ hydro* Rloop(vector<PhaseDgm> &Comp, vector<double> M_Comp, vector<double> ave_r
 
   gsl_root_fsolver_free (s);
 
+  Rp = R_hi;
   hydro *temp=new hydro(R_hi, Comp, M_Comp, Tgap, ode_eps_rel0, P0, isothermal); // Need the branch of solution that does not diverge at the center to get the central pressure and temperature
 
   Pc = temp -> getPc() * sqrt(1 + temp -> getRc() / Rp); // Make a correction to the pressure
   Tc = temp -> getTc();
   cout<<"Rloop completed."<<endl;
+
   return temp;
 }
 
