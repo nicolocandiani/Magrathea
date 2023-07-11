@@ -16,7 +16,7 @@ OBJ := $(addprefix ./$(LIBDIR)/,$(OBJ))
 planet: $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS) $(DEBUG)
 
-$(LIBDIR)/%.o: $(SRCDIR)/%.cpp  
+$(LIBDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CC) -o $@ -c $< $(CFLAGS) $(DEBUG)
 
 clean:

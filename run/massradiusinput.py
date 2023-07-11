@@ -24,5 +24,5 @@ mass=minmass
 while mass<=maxmass:
     f.write(str(mass)+' '+ str(fcore) +' '+ str(fmantle) +' '+ str(fwater) +'\n')
     mass=round(mass+mstep,12)
-    
+
 f.close()

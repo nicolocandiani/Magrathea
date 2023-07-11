@@ -4,12 +4,12 @@
 
 **Excerpt from The Hitchhiker's Guide to the Galaxy, Page 634784, Section 5a, Entry: MAGRATHEA**
 
-Planet interior structure code for astronomers, planetary scientists, mice, and more. 
+Planet interior structure code for astronomers, planetary scientists, mice, and more.
 
 
 ## What is this repository for? ##
 
-A 1D planet structure code written in C++ which considers the case of fully differentiated interiors. 
+A 1D planet structure code written in C++ which considers the case of fully differentiated interiors.
 The code integrates the hydrostatic equation in order to shoot for the correct planet radius given the mass in each layer.
 The code returns the pressure, temperature, density, phase, and radius at steps of enclosed mass.
 The code supports 4 layers: core, mantle, hydrosphere, and atmosphere. Each layer has a phase diagram with equations of state (EOS) chosen for each phase.
@@ -24,17 +24,23 @@ We encourage the community to contribute to and use MAGRATHEA for their interior
 
 ## Prerequisite ##
 
-[Install the GSL library](https://www.gnu.org/software/gsl/)(>= v2.0).  Download the compressed package from the [GNU ftp site](ftp://ftp.gnu.org/gnu/gsl/).  Extract the file and install the package following the instruction in the `INSTALL` file.  For the simplest case, 
- 
+[Install the GSL library](https://www.gnu.org/software/gsl/)(>= v2.0).  Download the compressed package from the [GNU ftp site](ftp://ftp.gnu.org/gnu/gsl/).  Extract the file and install the package following the instruction in the `INSTALL` file.  For the simplest case,
+
     sudo ./configure
     sudo make
     sudo make install
 
-should configure, build, and install the gsl package.  A few prerequisites, such as `g++`, `make`, `make-guile`, may need to be install following the error messages throughout the process. 
+should configure, build, and install the gsl package.  A few prerequisites, such as `g++`, `make`, `make-guile`, may need to be install following the error messages throughout the process.
 
-On Ubuntu systems, the gsl package can also be installed from the Ubuntu repository using `sudo apt-get install libgsl23 libgsl-dev gsl-bin`. 
+<<<<<<< Updated upstream
+On Ubuntu systems, the gsl package can also be installed from the Ubuntu repository using `sudo apt install libgsl27 libgsl-dev gsl-bin`. 
 
-On Windows systems, we suggest the [cyqwin terminal](https://www.cygwin.com/). Include package 'gsl' upon installation. We suggest including all packages in devel, science, math, and python along with a text editor. 
+On Windows systems, we suggest using WSL and following the above isntructions.
+=======
+On Ubuntu systems, the gsl package can also be installed from the Ubuntu repository using `sudo apt-get install libgsl23 libgsl-dev gsl-bin`.
+
+On Windows systems, we suggest the [cyqwin terminal](https://www.cygwin.com/). Include package 'gsl' upon installation. We suggest including all packages in devel, science, math, and python along with a text editor.
+>>>>>>> Stashed changes
 
 If an error message like "error while loading shared libraries: libgsl.so.23: cannot open shared object file: No such file or directory" is reported when running the code, add `export LD_LIBRARY_PATH=/usr/local/lib` (directory of gsl library files) to the `.bashrc` file, or add `setenv LD_LIBRARY_PATH /usr/local/lib` to the `.cshrc` file.
 
@@ -88,7 +94,7 @@ Example input file:
     Mass  fCore  fMantle  fWater
     2     0.2    0.4      0.4
     1.5   0.5    0.39     0.1
-	
+
 Any remaining mass will be put into the atmosphere (i.e. 1% for the second planet).  Example input files can also be found under [run](run/).
 
 After setting the input_mode, `main.cpp` does not need to be edited. The user will be prompted after running the command `.\planet` for which solver to use, the temperature, and input and output file names.
@@ -102,7 +108,7 @@ MAGRATHEA will generate an output file with mass of core, mantle, water, and atm
 ### Secondary Modes ###
 ### input_mode=2 ###
 
-The fastest solver available using the `twolayer()` function.  Solves planets isothermally with only two layers using an inside-out shooting method.  Built to quickly make mass-radius curves with a constant mass ratio between the layers. 
+The fastest solver available using the `twolayer()` function.  Solves planets isothermally with only two layers using an inside-out shooting method.  Built to quickly make mass-radius curves with a constant mass ratio between the layers.
 
 The funciton is:
 
@@ -125,7 +131,7 @@ The built-in EOSs for various planet building materials and phases are listed in
 
 ### Adding new equations of state ###
 
-The code takes a new EOS in the format of (0) 3rd order Birch-Murnaghan, (1) 4th order Birch-Murnaghan, (2) Vinet, (3) Holzapfel, (4) Keane, (6) Ideal Gas, (7) Density-Pressure input table from file for interpolation, (8-12) same as 0-4 in combination with RTPress. 
+The code takes a new EOS in the format of (0) 3rd order Birch-Murnaghan, (1) 4th order Birch-Murnaghan, (2) Vinet, (3) Holzapfel, (4) Keane, (6) Ideal Gas, (7) Density-Pressure input table from file for interpolation, (8-12) same as 0-4 in combination with RTPress.
 
 New phases should be listed into the file `EOSlist.h` and defined in `EOSlist.cpp`.
 
@@ -143,14 +149,14 @@ Examples:
 
 
 
-Index | Variable | Unit | Comment 
+Index | Variable | Unit | Comment
 :---------: | :---------: | :----------: | -------------
-0 | EOS formula type | | Index in parentheses above 
-1 |	V0 | cm^3 mol^-1$ | Molar volume at reference point 
-2 |	K0 | GPa | Bulk modulus 
-3 |	K0' | | Pressure derivative of the bulk modulus. Default 4 
-4 |	K0'' | GPa^-1 | Second pressure derivative 
-5 |	m_mol | g mol^-1 | Molar mass 
+0 | EOS formula type | | Index in parentheses above
+1 |	V0 | cm^3 mol^-1$ | Molar volume at reference point
+2 |	K0 | GPa | Bulk modulus
+3 |	K0' | | Pressure derivative of the bulk modulus. Default 4
+4 |	K0'' | GPa^-1 | Second pressure derivative
+5 |	m_mol | g mol^-1 | Molar mass
 6 |	P0 | GPa | The minimum pressure, corresponding to V0. Default 0
 7 |	Theta0 | K | Fitting parameter of Einstein or Debye temperature. Default 1
 8 |	gamma_0 | | Fitting parameter of Gruneisen parameter
@@ -160,15 +166,15 @@ Index | Variable | Unit | Comment
 12 | e0 | 10^-6$ K^-1 | Electronic contribution to Helmholtz free energy. Default 0
 13 | g | | Electronic analogue of the Gruneisen parameter
 14 | n | | Number of atoms in the chemical formula. Default 1
-15 |  Z | | Atomic number (number of electron) 
-16 | T0 | K | Reference temperature for the thermal pressure. Default 300 
-17 | alpha0 | 10^-6 K^-1 | The zeroth order coefficient of thermal expansion at a reference pressure P0 
-18 | alpha1 | 10^-6 K^-2 | The first order coefficient of thermal expansion at a reference pressure P0 
-19 | xi | | Power law index in the coefficient of thermal expansion. Default 0 
+15 |  Z | | Atomic number (number of electron)
+16 | T0 | K | Reference temperature for the thermal pressure. Default 300
+17 | alpha0 | 10^-6 K^-1 | The zeroth order coefficient of thermal expansion at a reference pressure P0
+18 | alpha1 | 10^-6 K^-2 | The first order coefficient of thermal expansion at a reference pressure P0
+19 | xi | | Power law index in the coefficient of thermal expansion. Default 0
 20 | c_p0 | 10^7 erg g^-1 K^-1 | Specific heat capacity at constant pressure
 21 | c_p1 | 10^7 erg g^-1 K^-2 | Coefficient for specific heat capacity
 22 | c_p2 | 10^7 erg g^-1 K  | Coefficient for specific heat capacity
-23 | Debye approx |  | Positive number for Debye, otherwise Einstein 
+23 | Debye approx |  | Positive number for Debye, otherwise Einstein
 24 |thermal type | | See Paper
 
 ### Phase Diagrams ###
@@ -177,7 +183,7 @@ To pick desired materials/phases in each layer, change the corresponding return 
 
 Example:
 
-	// Phase Diagram for Mantle 
+	// Phase Diagram for Mantle
 	EOS* find_Si_phase(double P, double T)
 	{
 	   if (P <= 0 || T <= 0)
@@ -203,7 +209,7 @@ In the equations below, *m* is the number of formula units per unit cell. For ex
 
 * 1 &#8491;<sup>3</sup>/cell = 10<sup>-24</sup>N<sub>A</sub>/m cm<sup>3</sup>/mol = 0.6022/m cm<sup>3</sup>/mol.
 * 1 &#8491;<sup>3</sup>/atom = 10<sup>-24</sup>nN<sub>A</sub> cm<sup>3</sup>/mol = 0.6022n cm<sup>3</sup>/mol.
-* 1 eV/atom = 1.602&times;10<sup>-12</sup>nN<sub>A</sub> erg/mol = 9.649&times;10<sup>11</sup>n erg/mol. 
+* 1 eV/atom = 1.602&times;10<sup>-12</sup>nN<sub>A</sub> erg/mol = 9.649&times;10<sup>11</sup>n erg/mol.
 * 1 GPa = 10<sup>10</sup>&micro;bar = 0.01 Mbar.
 
 ### Several functions can be used to obtain the calculated planetary parameters ###
@@ -223,12 +229,12 @@ Function | Output unit | Comment
 `double getT(int l)` | K | return the temperature at layer `l`
 `int getsize()` |  | return the total number of layers
 `vector<double> getRs()` | R⊕ | Return the radii of core, mantle, and water layer, and the total radius in the unit of earth radii.
-`vector<double> getTs()` | K | Return the temperatures at the outer side of each component interfaces as well as planet surface 
+`vector<double> getTs()` | K | Return the temperatures at the outer side of each component interfaces as well as planet surface
 
 Example code:
 
     vector<double> Tgap = {0, 0, 0, 300};
-    vector<double> Mcomp =  {1.0,0.5,0.1,0.00001}; 
+    vector<double> Mcomp =  {1.0,0.5,0.1,0.00001};
     planet=fitting_method(Comp, Mcomp, Tgap, ave_rho, P_surface, false);
     if (planet)
     {
@@ -281,7 +287,7 @@ David R. Rice, University of Nevada, Las Vegas [website](https://www.physics.unl
 **Where is the EOS/functionality I want?**
 
 Open an issue with details of what you need. Future work includes implementing additional core alloys, more phases of water, a
-thermodynamic Ice X, and atmosphere EOSs. 
+thermodynamic Ice X, and atmosphere EOSs.
 
 **What if I need to model a planet, but I'm currently being tortured by Vogon poetry?**
 
@@ -293,7 +299,7 @@ MAGRATHEA and many other useful exoplanet-related codes are archived on NASA's [
 
 **Where does the name MAGRATHEA come from?**
 
-Magrathea is a fictional planet in Douglas Adams's *The Hitchiker's Guide to the Galaxy*: 
+Magrathea is a fictional planet in Douglas Adams's *The Hitchiker's Guide to the Galaxy*:
 
 "for all the richest and most successful merchants life inevitably became rather dull and niggly, and they began to imagine that this was therefore the fault of the worlds they'd settled on... And thus were created the conditions for a staggering new form of specialist industry: custom-made luxury planet building. The home of this industry was the planet Magrathea, where hyperspatial engineers sucked matter through white holes in space to form it into dream planets- gold planets, platinum planets, soft rubber planets with lots of earthquakes- all lovingly made to meet the exacting standards that the Galaxy's richest men naturally came to expect.
 

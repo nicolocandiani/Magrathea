@@ -1,4 +1,4 @@
-Mass fCore fMantle fWater 
+Mass fCore fMantle fWater
 1.0 0.0 0.0 1.0
 1.0 0.0 0.01 0.99
 1.0 0.0 0.02 0.98

@@ -12,4 +12,6 @@ Makefile
 #ignore outdated files
 *old*
 #ignore plots
-plot/*
+plot/
+#ignore results
+result/
