@@ -33,7 +33,7 @@ We encourage the community to contribute to and use MAGRATHEA for their interior
 should configure, build, and install the gsl package.  A few prerequisites, such as `g++`, `make`, `make-guile`, may need to be install following the error messages throughout the process.
 
 <<<<<<< Updated upstream
-On Ubuntu systems, the gsl package can also be installed from the Ubuntu repository using `sudo apt install libgsl27 libgsl-dev gsl-bin`. 
+On Ubuntu systems, the gsl package can also be installed from the Ubuntu repository using `sudo apt install libgsl27 libgsl-dev gsl-bin`.
 
 On Windows systems, we suggest using WSL and following the above isntructions.
 =======
@@ -274,6 +274,14 @@ Magrathea outputs can be imaged in the 3D open-source software Blender. Instruct
  <p align="center">
 <img width = "200" src="plot/planet1.png"/>
  </p>
+
+## Ignore git hook check when commits ##
+
+It is possible to override and ignore the checks by passing the --no-verify tag at the end of your message. For example:
+
+    git add .
+    git commit -m "This code does not pass checks" --no-verify
+
 
 ## Don't Panic (FAQ) ##
 

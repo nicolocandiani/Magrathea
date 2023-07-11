@@ -40,7 +40,7 @@ for line in lines[1:]:
 
 #python ternary uses a dictionary ((bottom,right,left):float)
 index=list(zip(coreid,iceid,mantleid))  #Rotation of Zeng & Seager 08
-data=dict((index[i],radius[i]) for i in range(len(index))) 
+data=dict((index[i],radius[i]) for i in range(len(index)))
 #core to mantle ratio increases along the bottom axes
 #the water percentage increases perpendicular to the bottomaxis
 
@@ -56,7 +56,7 @@ tax.gridlines(color="black", multiple=5.0)
 #HeatMap
 mycmap = plt.cm.get_cmap('cmr.rainforest')
 cb_kwargs={"shrink" : 0.8,"orientation":"horizontal","pad" : 0.02}
-tax.heatmap(data,cmap=mycmap,cb_kwargs=cb_kwargs,style='triangular') 
+tax.heatmap(data,cmap=mycmap,cb_kwargs=cb_kwargs,style='triangular')
 plt.text(45,-30, r'R$_\oplus$',fontsize=16)
 
 # Set Axis labels and Title
@@ -82,4 +82,3 @@ tax._redraw_labels()
 tax.savefig('oneearthternary.pdf')
 tax.close()
 inf.close()
-
